@@ -1,0 +1,13 @@
+// Testing image creation for game
+
+POST http://localhost:5000/api/images/create
+Content-Type: application/json
+
+{
+    "colors": [
+        "#252525",
+        "#161616",
+        "#363636",
+        "#545454"
+    ]
+}

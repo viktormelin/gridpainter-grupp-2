@@ -5,6 +5,8 @@ import userRouter from './routes/user.route';
 
 dotenv.config();
 
+const imagesRouter = require('./routes/images');
+
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -18,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/user', userRouter);
+app.use('/api/images', imagesRouter);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
