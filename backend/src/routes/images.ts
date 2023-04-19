@@ -1,17 +1,10 @@
 const express = require('express');
 const router = express.Router();
 import {Request, Response} from 'express';
+import Image from '../models/ImageModel';
 
 
 router.post('/create', function(req: Request, res: Response) {
-/*     const image = {
-        id: 1,
-        squares: {
-            1: '#ffffff',
-
-        }
-        
-    } */
    
     const colors = req.body.colors;
 
@@ -20,8 +13,7 @@ router.post('/create', function(req: Request, res: Response) {
 
         type squareType = {
             id: number,
-            squares: {[key: number]: string}
-          
+            squares: {[key: number]: string}          
           };
 
         const image: squareType = {
@@ -31,13 +23,10 @@ router.post('/create', function(req: Request, res: Response) {
 
         for (let i:number = 0; i <225; i++) {
             const colorAmount = req.body.colors.length;
-            const colorIndex = Math.floor(Math.random()*colorAmount);
-         
+            const colorIndex = Math.floor(Math.random()*colorAmount);         
             
-            image.squares[i] = req.body.colors[colorIndex]
-            
-        }
-        console.log(image.squares);
+            image.squares[i] = req.body.colors[colorIndex]            
+        }         
         
         
     }

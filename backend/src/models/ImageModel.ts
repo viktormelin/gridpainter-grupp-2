@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import {Schema, model } from 'mongoose';
 
 const imageSchema = new Schema(
     
@@ -14,7 +14,9 @@ const imageSchema = new Schema(
             }
         }
 
-    }
+    },
+
+    {collection: 'images'}
 
 );
 
