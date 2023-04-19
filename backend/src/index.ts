@@ -2,10 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import userRouter from './routes/user.route';
-import { Socket } from 'socket.io';
-import chatService from './services/chat.service';
-import handleEvent from './services/chat.service';
+import { Socket, Server } from "socket.io";
 import { ClientChat } from './models/ClientChat';
+import handleChatEvent from './services/chat.service';
+import * as http from 'http';
 import connectDB from './config/database';
 
 dotenv.config();
@@ -13,9 +13,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-const http = require('http');
 const server = http.createServer(app);
-const socketIo = require('socket.io');
 
 app.use(cors());
 app.use(express.json());
@@ -27,16 +25,16 @@ app.get('/', (req, res) => {
 
 app.use('/api/user', userRouter);
 
-const io = socketIo(server, {
-  cors: {
-    methods: ['GET', 'POST'],
-  },
+const io = new Server(server, {
+	cors: {
+		methods: ["GET", "POST"]
+	}
 });
 
-io.on('connection', (socket: Socket) => {
-  socket.on('chat', (arg: ClientChat) => {
-    handleEvent(arg, io);
-  });
+io.on("connection", (socket: Socket) => {
+	socket.on("chat", (arg: ClientChat) => {
+		handleChatEvent(arg, io);
+	});
 });
 
 server.listen(3000, () => {
