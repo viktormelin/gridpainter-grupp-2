@@ -18,18 +18,29 @@ router.post('/create', function(req: Request, res: Response) {
     if (colors.length > 1 && colors.length < 5) {
         console.log(colors.length);
 
-        const image = {
+        type squareType = {
+            id: number,
+            squares: {[key: number]: string}
+          
+          };
+
+        const image: squareType = {
             id: 1,
             squares: {}
         }
 
 
         // fortsätt här
-        for (let i = 0; i <5; i++) {
-            let image = {[i]:"testar"}
-            console.log(image);
+        for (let i:number = 0; i <225; i++) {
+            const colorAmount = req.body.colors.length;
+            const colorIndex = Math.floor(Math.random()*colorAmount);
+         
+            
+            image.squares[i] = req.body.colors[colorIndex]
             
         }
+        console.log(image.squares);
+        
         
     }
 
