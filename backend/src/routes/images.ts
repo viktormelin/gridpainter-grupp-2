@@ -29,8 +29,6 @@ router.post('/create', function(req: Request, res: Response) {
             squares: {}
         }
 
-
-        // fortsätt här
         for (let i:number = 0; i <225; i++) {
             const colorAmount = req.body.colors.length;
             const colorIndex = Math.floor(Math.random()*colorAmount);
