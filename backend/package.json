@@ -16,6 +16,7 @@
     "@types/node": "^18.15.11",
     "cors": "^2.8.5",
     "eslint": "^8.38.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "express-async-handler": "^1.2.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
