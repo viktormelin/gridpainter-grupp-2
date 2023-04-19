@@ -6,6 +6,7 @@ import { Socket, Server } from "socket.io";
 import { ClientChat } from './models/ClientChat';
 import handleChatEvent from './services/chat.service';
 import * as http from 'http';
+import connectDB from './config/database';
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-	res.send('Hello World');
+  res.send('Hello World');
 });
 
 app.use('/api/user', userRouter);
@@ -37,9 +38,10 @@ io.on("connection", (socket: Socket) => {
 });
 
 server.listen(3000, () => {
-	console.log(`Socket started on port 3000`);
+  console.log(`Socket started on port 3000`);
 });
 
 app.listen(PORT, () => {
-	console.log(`Server started on port ${PORT}`);
+  console.log(`Server started on port ${PORT}`);
+  connectDB();
 });
