@@ -3,9 +3,8 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import userRouter from './routes/user.route';
 import { Socket } from "socket.io";
-import chatService from './services/chat.service';
-import handleEvent from './services/chat.service';
 import { ClientChat } from './models/ClientChat';
+import handleChatEvent from './services/chat.service';
 
 dotenv.config();
 
@@ -34,7 +33,7 @@ const io = socketIo(server, {
 
 io.on("connection", (socket: Socket) => {
 	socket.on("chat", (arg: ClientChat) => {
-		handleEvent(arg, io);
+		handleChatEvent(arg, io);
 	});
 });
 
