@@ -3,23 +3,13 @@ import {Schema, model } from 'mongoose';
 const imageSchema = new Schema(
     
     {
-        id: {
-            type: Number,
-            required: true
-        },
-        image: {
-            id: {
-                type: String,
+        squares: {
+                type: Schema.Types.Mixed,
                 required: true
-            }
         }
-
-    },
-
-    {collection: 'images'}
-
+    }
 );
 
-const Image = model('Users', imageSchema);
+const Image = model('Image', imageSchema);
 
 export default Image;

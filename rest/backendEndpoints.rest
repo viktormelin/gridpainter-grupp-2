@@ -1,4 +1,5 @@
-// Testing image creation for game
+// Testing image creation for game.
+// Body needs to contain minimum two colors, maximum four colors.
 
 POST http://localhost:5000/api/images/create
 Content-Type: application/json
