@@ -4,11 +4,9 @@ export function createLoginHTML() {
     const main = document.querySelector('main') as HTMLElement;
 
     main.innerHTML = `
-    <form id="loginForm">
-        <label>
-            Name: 
-            <input type="text" id="inputUsername">
-        </label>
+    <form class="loginForm">
+        <input aria-label="name inputfield" type="text" id="inputUsername" placeholder="name">
+        
         <button id="submitUsername">play</button>
     </form>
     `;
