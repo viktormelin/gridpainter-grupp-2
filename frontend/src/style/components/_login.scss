@@ -1,0 +1,22 @@
+.loginForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+    input {
+        display: block;
+        margin: 36px;
+        height: 36px;
+        width: 180px;
+    }
+    button {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 36px;
+        width: 140px;
+    }
+
+}
