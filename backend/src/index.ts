@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import userRouter from './routes/user.route';
+import imageRouter from './routes/image.route';
 import { Socket } from 'socket.io';
 import chatService from './services/chat.service';
 import handleEvent from './services/chat.service';
@@ -9,8 +10,6 @@ import { ClientChat } from './models/ClientChat';
 import connectDB from './config/database';
 
 dotenv.config();
-
-const imagesRouter = require('./routes/images');
 
 const PORT = process.env.PORT || 5000;
 
@@ -28,7 +27,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/user', userRouter);
-app.use('/api/images', imagesRouter);
+app.use('/api/images', imageRouter);
 
 const io = socketIo(server, {
   cors: {

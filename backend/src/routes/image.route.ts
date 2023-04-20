@@ -1,9 +1,12 @@
-const express = require('express');
-const router = express.Router();
+//const express = require('express');
+//const router = express.Router();
+import { Router } from 'express';
+const imageRouter = Router();
 import {Request, Response} from 'express';
 import Image from '../models/ImageModel';
+import { createImage } from '../controllers/image.controller';
 
-router.post('/create', async function(req: Request, res: Response) {   
+imageRouter.post('/create', async function(req: Request, res: Response) {   
     const colors: string[] = req.body.colors;
 
     const isStrings = (arr: string[]) => arr.every(i => typeof i === 'string')
@@ -11,21 +14,12 @@ router.post('/create', async function(req: Request, res: Response) {
     
 
     if (isStrings(colors) && colors.length > 1 && colors.length < 5) {
-        type squareType = {
-            squares: {[key: number]: string}          
-          };
+       
+    const image = createImage(req.body.colors);
 
-        const image: squareType = {
-            squares: {}
-        }
+    const newImage = await Image.create(image);
 
-        for (let i:number = 0; i <225; i++) {
-            const colorAmount = req.body.colors.length;
-            const colorIndex = Math.floor(Math.random()*colorAmount);         
-            image.squares[i] = req.body.colors[colorIndex]            
-        }         
-        
-    const newImage = new Image(image);
+    //const newImage = await Image.create(image) if (newImage) { res.status(201) } else { res.status(500) throw new Error('fel') }
 
     try {
         const response = await newImage.save();            
@@ -41,16 +35,5 @@ router.post('/create', async function(req: Request, res: Response) {
 
 });
 
-
-
-
-
-
-
-
-
-
-
-
-module.exports = router;
+export default imageRouter;
 
