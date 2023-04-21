@@ -4,9 +4,12 @@ import * as dotenv from 'dotenv';
 import userRouter from './routes/user.route';
 import { Socket, Server } from "socket.io";
 import { ClientChat } from './models/ClientChat';
+import { ClientDraw } from './models/ClientDraw';
 import handleChatEvent from './services/chat.service';
+import handleDrawEvent from './services/draw.service';
 import * as http from 'http';
 import connectDB from './config/database';
+
 
 dotenv.config();
 
@@ -34,6 +37,10 @@ const io = new Server(server, {
 io.on("connection", (socket: Socket) => {
 	socket.on("chat", (arg: ClientChat) => {
 		handleChatEvent(arg, io);
+	});
+
+	socket.on("draw", (arg: ClientDraw) => {
+		handleDrawEvent(arg, io);
 	});
 });
 

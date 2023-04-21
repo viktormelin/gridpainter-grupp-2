@@ -1,6 +1,7 @@
 import "./style/style.scss"
-import { createChatHTML } from "./chat";
 import { createLoginHTML } from "./login";
+import { createGameHTML } from "./draw";
 
 
 createLoginHTML();
+createGameHTML();
