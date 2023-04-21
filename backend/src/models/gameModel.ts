@@ -1,14 +1,14 @@
 import { ObjectId, Schema, model, Document } from 'mongoose';
 
 
-type PlayerType = {
-  name: String,
-  color: String,
+export type playerType = {
+  name?: String,
+  color?: String,
 }
 
-export interface IGame extends Document {
+export interface IGame {
 
-  players: [PlayerType];
+  players: playerType[];
   active: Boolean;
 
 
@@ -36,6 +36,6 @@ const gameSchema = new Schema<IGame>(
   { timestamps: true }
 );
 
-const Game = model('Games', gameSchema);
+export const Game = model('Games', gameSchema);
 
-export default Game;
+
