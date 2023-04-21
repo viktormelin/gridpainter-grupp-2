@@ -1,7 +1,6 @@
 // Testing image creation for game.
 // Body needs to contain minimum two colors, maximum four colors.
 // Returns if successful object including created image.
-
 POST http://localhost:5000/api/images/create
 Content-Type: application/json
 
@@ -13,3 +12,10 @@ Content-Type: application/json
         "#545454"
     ]
 }
+
+###
+
+// Get all images.
+GET http://localhost:5000/api/images/getAll
+
+###
