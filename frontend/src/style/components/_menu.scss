@@ -1,0 +1,23 @@
+.menuContainer {
+    margin-top: 10%;
+    justify-content: center;
+    align-items: center;
+
+    display: grid;
+    grid-template-areas: 
+    'savedPics  highscores'
+    'play       freePaint';
+
+    button {
+        margin: 2rem;
+
+        font-size: 1.5rem;
+
+        height: 54px;
+        width: 210px;
+
+        border-radius: 0.3rem;
+
+        background-color: #242424;
+    }
+}

@@ -4,7 +4,7 @@ export function createGameSelectHTML() {
     const main = document.querySelector('main') as HTMLElement;
 
     main.innerHTML = `
-    <div id="buttonsContainer">
+    <div class="menuContainer">
       <button id="savedPicsBtn">Saved pictures</button>
  
       <button id="highscoresBtn">Highscores</button>
