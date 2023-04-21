@@ -6,7 +6,7 @@ type squareType = {
     squares: {[key: number]: string}          
   };
 
-export const createImage = asyncHandler(async (req, res): Promise<void> => {
+export const createImage = asyncHandler(async (req: Request, res: Response): Promise<void> => {
 
     const image: squareType = {
         squares: {}
