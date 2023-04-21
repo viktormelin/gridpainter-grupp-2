@@ -1,4 +1,5 @@
 import { io } from "socket.io-client";
+import { IServerDraw } from "./models/IServerDraw";
 const socket = io("http://localhost:3000");
 
 export function createGameHTML() {
@@ -30,7 +31,7 @@ export function createGameHTML() {
 	main.appendChild(boardTable);
 }
 
-socket.on("draw", (arg) => {
+socket.on("draw", (arg: IServerDraw) => {
 	let boardTd = document.getElementById(arg.id) as HTMLTableCellElement;
 
 	boardTd.style.background = arg.color;
