@@ -8,6 +8,7 @@ import { ClientChat } from './models/ClientChat';
 import handleChatEvent from './services/chat.service';
 import * as http from 'http';
 import connectDB from './config/database';
+import gameRouter from './routes/game.route';
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/user', userRouter);
 app.use('/api/images', imageRouter);
+
+app.use('/api/game', gameRouter);
 
 const io = new Server(server, {
 	cors: {
