@@ -17,7 +17,10 @@ imageRouter.post('/create', async function(req: Request, res: Response) {
 
     try {
         const response = await newImage.save();            
-        res.status(200).json({message: 'image saved in database', id: response._id})
+        res.status(200).json({message: 'image saved in database', image: {
+            id: response._id,
+            squares: response.squares
+        }})
 
     } catch (error) {
         res.status(500).json({message: 'internal server error', error: error})
