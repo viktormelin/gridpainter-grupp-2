@@ -5,9 +5,9 @@ export function createLoginHTML() {
 
     main.innerHTML = `
     <form class="loginForm">
-        <input aria-label="name inputfield" type="text" id="inputUsername" placeholder="name">
+        <input aria-label="name inputfield" type="text" id="inputUsername" placeholder="Enter name">
         
-        <button id="submitUsername">play</button>
+        <button id="submitUsername">Login</button>
     </form>
     `;
 
