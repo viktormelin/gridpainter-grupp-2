@@ -10,6 +10,10 @@
         margin: 36px;
         height: 36px;
         width: 180px;
+
+        padding-left: 0.8rem;
+
+        border-radius: 0.3rem;
     }
     button {
         position: relative;
@@ -17,6 +21,10 @@
         transform: translateX(-50%);
         height: 36px;
         width: 140px;
+
+        border-radius: 0.3rem;
+
+        background-color: #242424;
     }
 
 }

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
 import userRouter from './routes/user.route';
+import imageRouter from './routes/image.route';
 import { Socket, Server } from "socket.io";
 import { ClientChat } from './models/ClientChat';
 import handleChatEvent from './services/chat.service';
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/user', userRouter);
+app.use('/api/images', imageRouter);
 
 const io = new Server(server, {
 	cors: {
