@@ -1,4 +1,4 @@
-
+import { createGameSelectHTML } from "./game-select";
 
 export function createLoginHTML() {
     const main = document.querySelector('main') as HTMLElement;
@@ -16,5 +16,6 @@ export function createLoginHTML() {
     submitBtn.addEventListener('click', function (e) {
         e.preventDefault();
         sessionStorage.setItem('name', usernameInput.value);
+        createGameSelectHTML();
     })
 }
