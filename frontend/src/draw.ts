@@ -2,6 +2,9 @@ import { io } from "socket.io-client";
 import { IServerDraw } from "./models/IServerDraw";
 const socket = io("http://localhost:3000");
 
+const boardSizeX = 15;
+const boardSizeY = 15;
+
 export function createGameHTML() {
 	let loggedInUser = sessionStorage.getItem('name');
 
@@ -9,11 +12,11 @@ export function createGameHTML() {
 	boardTable.className = "board";
 	boardTable.id = "bigBoard"
 
-	for (let i = 1; i <= 15; i++) {
+	for (let i = 0; i < boardSizeY; i++) {
 		let boardTr = document.createElement("tr")
 		boardTr.className = "new-tr";
 
-		for (let j = 1; j <= 15; j++) {
+		for (let j = 0; j < boardSizeX; j++) {
 			let boardTd = document.createElement("td")
 			boardTd.className = "new-td";
 			boardTd.id = JSON.stringify(i) + ":" + JSON.stringify(j);
