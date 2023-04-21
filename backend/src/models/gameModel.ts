@@ -1,8 +1,14 @@
 import { ObjectId, Schema, model, Document } from 'mongoose';
 
+
+type PlayerType = {
+  name: String,
+  color: String,
+}
+
 export interface IGame extends Document {
 
-  players: [String];
+  players: [PlayerType];
   active: Boolean;
 
 
@@ -10,8 +16,16 @@ export interface IGame extends Document {
 const gameSchema = new Schema<IGame>(
   {
     players: {
-      type: [String],
+      type: [Object],
       required: true,
+      name: {
+        type: [String],
+        required: true,
+      },
+      color: {
+        type: String,
+        default: '#000000'
+      }
     },
     active: {
       type: Boolean,

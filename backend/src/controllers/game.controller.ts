@@ -4,21 +4,26 @@ import Game, { IGame } from '../models/gameModel';
 import { ObjectId } from 'mongoose';
 
 type player = {
-    name: string          
+    name: String,  
+    color: String
 };
 
 
 export const createGame = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     //const testGame = new Game({ players: ["Tester", "Tester2", "Tester3"]})
     //await testGame.save();
-    
+    const player: player = {
+        name: "req.body.name",
+        color: "#000000"
+    }
+
     var result = await Game.findOne({ active: true });
     
     if (!result) {
         result = new Game({});
     }
     if (result.players.length < 3) { 
-        result.players.push("Tester");
+        result.players.push(player);
         console.log("Adding player");
         await result.save()
             .then(savedDoc => {
@@ -28,7 +33,7 @@ export const createGame = asyncHandler(async (req: Request, res: Response): Prom
         
         
     } else {
-        result.players.push("Tester");
+        result.players.push(player);
         console.log("Adding player");
         //Start game
         console.log("Playercount: " + result.players.length + ", starting game");
