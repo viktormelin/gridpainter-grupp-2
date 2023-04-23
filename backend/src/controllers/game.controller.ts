@@ -1,8 +1,7 @@
 import {Request, Response} from 'express';
 import asyncHandler from 'express-async-handler';
-import {Game, IGame, playerType } from '../models/gameModel';
-import { ObjectId } from 'mongoose';
-import { Socket, Server } from "socket.io";
+import {Game, playerType } from '../models/gameModel';
+
 
 type player = {
     name: String,  
