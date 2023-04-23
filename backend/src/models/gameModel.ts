@@ -1,6 +1,12 @@
 import { ObjectId, Schema, model, Document } from 'mongoose';
 
 
+export class gameClass {
+  constructor(
+    public gameID: string,
+  ){}
+}
+
 export type playerType = {
   name?: String,
   color?: String,
@@ -12,7 +18,7 @@ export interface IGame {
   active: Boolean;
 
 
-  }
+}
 const gameSchema = new Schema<IGame>(
   {
     players: {

@@ -2,7 +2,7 @@ import {Request, Response} from 'express';
 import asyncHandler from 'express-async-handler';
 import {Game, IGame, playerType } from '../models/gameModel';
 import { ObjectId } from 'mongoose';
-import { type } from 'os';
+import { Socket, Server } from "socket.io";
 
 type player = {
     name: String,  
@@ -43,7 +43,7 @@ export const createGame = asyncHandler(async (req: Request, res: Response): Prom
         name: "req.body.name",
         color: giveColour()
     }
-
+    
     var result = await Game.findOne({ active: true });
     
     if (!result) {
@@ -70,6 +70,7 @@ export const createGame = asyncHandler(async (req: Request, res: Response): Prom
         await result.save()
             .then(savedDoc => {
                 res.send(savedDoc);
+                
             })
         
     }

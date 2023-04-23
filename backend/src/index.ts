@@ -9,6 +9,8 @@ import handleChatEvent from './services/chat.service';
 import * as http from 'http';
 import connectDB from './config/database';
 import gameRouter from './routes/game.route';
+import { gameClass } from './models/gameModel';
+import { handleGameStart } from './services/game.service';
 
 dotenv.config();
 
@@ -39,6 +41,9 @@ const io = new Server(server, {
 io.on("connection", (socket: Socket) => {
 	socket.on("chat", (arg: ClientChat) => {
 		handleChatEvent(arg, io);
+	});
+	socket.on("gameEvent", (game: gameClass) => {
+		handleGameStart(game, io);
 	});
 });
 
