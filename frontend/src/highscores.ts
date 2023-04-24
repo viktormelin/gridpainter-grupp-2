@@ -4,8 +4,10 @@ export function createHighscoresHTML() {
     const main = document.querySelector('main') as HTMLElement;
 
     main.innerHTML = `
-    <h2>Highscores</h2>
-    <div id="highscoresList">
+    <div id="h2Background">
+      <h2>HighScores</h2>
+    </div>
+    <div class="highscoresList">
       <ol>
         <li>Test</li>
         <li>Test</li>
