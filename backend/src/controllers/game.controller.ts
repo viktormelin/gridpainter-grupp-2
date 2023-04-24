@@ -43,7 +43,7 @@ export const createGame = asyncHandler(async (req: Request, res: Response): Prom
         color: giveColour()
     }
     
-    var result = await Game.findOne({ active: true });
+    var result = await Game.findOne({ full: false });
     
     if (!result) {
         result = new Game({});
@@ -65,7 +65,8 @@ export const createGame = asyncHandler(async (req: Request, res: Response): Prom
         console.log("Playercount: " + result.players.length + ", starting game");
         
         
-        result.active = false;
+        result.full = true;
+        result.active = true;
         await result.save()
             .then(savedDoc => {
                 res.send(savedDoc);

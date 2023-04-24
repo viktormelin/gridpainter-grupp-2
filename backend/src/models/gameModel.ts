@@ -16,6 +16,7 @@ export interface IGame {
 
   players: playerType[];
   active: Boolean;
+  full: Boolean;
 
 
 }
@@ -36,7 +37,12 @@ const gameSchema = new Schema<IGame>(
     active: {
       type: Boolean,
       required: true,
-      default: true
+      default: false
+    },
+    full: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
   { timestamps: true }
