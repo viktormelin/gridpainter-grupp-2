@@ -19,7 +19,7 @@ export function createGameHTML() {
 		for (let j = 0; j < boardSizeX; j++) {
 			let boardTd = document.createElement("td")
 			boardTd.className = "new-td";
-			boardTd.id = JSON.stringify(i) + ":" + JSON.stringify(j);
+			boardTd.id = JSON.stringify(15 * i + j);
 			boardTr.appendChild(boardTd);
 
 			boardTd.addEventListener('click', () => {
