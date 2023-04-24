@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 import asyncHandler from 'express-async-handler';
 import {Game, playerType } from '../models/gameModel';
+import { createImageToGame } from './image.controller';
 
 
 type player = {
@@ -42,7 +43,7 @@ export const createGame = asyncHandler(async (req: Request, res: Response): Prom
         name: "req.body.name",
         color: giveColour()
     }
-    
+    Game.findOne().deleteOne();
     var result = await Game.findOne({ full: false });
     
     if (!result) {
@@ -68,7 +69,8 @@ export const createGame = asyncHandler(async (req: Request, res: Response): Prom
         result.full = true;
         result.active = true;
         await result.save()
-            .then(savedDoc => {
+            .then(async savedDoc => {
+                savedDoc.gameImage = await createImageToGame(savedDoc);
                 res.send(savedDoc);
                 
             })

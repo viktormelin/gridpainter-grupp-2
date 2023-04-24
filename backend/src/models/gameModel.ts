@@ -8,8 +8,8 @@ export class gameClass {
 }
 
 export type playerType = {
-  name?: String,
-  color?: String,
+  name?: string,
+  color?: string,
 }
 
 export interface IGame {
@@ -17,7 +17,7 @@ export interface IGame {
   players: playerType[];
   active: Boolean;
   full: Boolean;
-
+  gameImage: Object;
 
 }
 const gameSchema = new Schema<IGame>(
@@ -43,6 +43,10 @@ const gameSchema = new Schema<IGame>(
       type: Boolean,
       required: true,
       default: false
+    },
+    gameImage: {
+      type: Object,
+      default: null
     }
   },
   { timestamps: true }
