@@ -40,6 +40,4 @@ export const createImage = asyncHandler(async (req: Request, res: Response): Pro
     }   else {
         res.status(401).json({message: 'invalid data', body: req.body})
     }
-
-}
-)
+})
