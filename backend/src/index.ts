@@ -50,8 +50,3 @@ io.on("connection", (socket: Socket) => {
 server.listen(PORT, () => {
   console.log(`Socket started on port ${PORT}`);
 });
-
-// app.listen(PORT, () => {
-//   console.log(`Server started on port ${PORT}`);
-//   connectDB();
-// });
