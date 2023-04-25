@@ -1,4 +1,4 @@
-
+import { createHighscoresHTML } from "./highscores";
 
 export function createGameSelectHTML() {
     const main = document.querySelector('main') as HTMLElement;
@@ -14,28 +14,30 @@ export function createGameSelectHTML() {
       <button id="freePaintBtn">Free Painting</button> 
    </div>`;
 
-  
+   const highscoresBtn = document.getElementById('highscoresBtn');
+
+   highscoresBtn?.addEventListener('click', function () {
+      createHighscoresHTML();
+   })
+
    // Preparement for the menu alternatives
 
    /*
    const savedPicsBtn = document.getElementById('savedPicsBtn');
-   const highscoresBtn = document.getElementById('highscoresBtn');
+   
    const playBtn = document.getElementById('playBtn');
    const freePaintBtn = document.getElementById('freePaintBtn');
 
-   savedPicsBtn?.addEventListener('click', function {
+   savedPicsBtn?.addEventListener('click', function () {
 
    })
 
-   highscoresBtn?.addEventListener('click', function {
+
+   playBtn?.addEventListener('click', function () {
 
    })
 
-   playBtn?.addEventListener('click', function {
-
-   })
-
-   freePaintBtn?.addEventListener('click', function {
+   freePaintBtn?.addEventListener('click', function () {
 
    })
    */
