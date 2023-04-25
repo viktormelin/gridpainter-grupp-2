@@ -1,16 +1,20 @@
 import { io } from 'socket.io-client';
-import { IGame } from './models/iGame';
+import { IGame, gameClass } from './models/iGame';
 import { IUser } from './models/IUser';
 import { fetchUser } from './utils/user';
-const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
-const createGame = "https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/game/create";
+//const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
+const socket = io("localhost:5000");
+//const createGame = "https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/game/create";
+const createGame = "http://localhost:5000/api/game/create";
 
-
-
-async function joinGameService(user: IUser | null) {
+async function joinGameService(arg: IUser | null): Promise<IGame> {
     
-    if (!user) {
-        return null;
+    if (!arg) {
+        throw "error, no valid user";
+    }
+    const user: IUser = {
+        _id: arg._id,
+        username: arg.username
     }
     return fetch(createGame, {
         method: 'POST',
@@ -25,8 +29,10 @@ async function joinGameService(user: IUser | null) {
 
 
 socket.on('gameEvent', (arg: IGame) => {
+    console.log(arg);
+    
     const gameAssemblyContainer = document.querySelector('.gameAssemblyContainer')
-    if (gameAssemblyContainer) {
+    if (gameAssemblyContainer && arg) {
         gameAssemblyContainer.innerHTML = `
         <p>
             Waiting for players... ${arg.players.length}/4
@@ -42,7 +48,12 @@ export function gameAssemblyHTML(): void {
     document.body.appendChild(container);
 }
 
-export function joinGame(): void {
-    joinGameService(fetchUser());
+export async function joinGame(): Promise<void> {
+    
+    const game: IGame = await joinGameService(fetchUser());
+    const gameSocket = new gameClass(game._id);
+    console.log(gameSocket);
+    socket.emit('gameEvent', gameSocket);
+    
     gameAssemblyHTML();
 }

@@ -1,6 +1,6 @@
 export class gameClass {
   constructor(
-    public gameID: string,
+    public _id: string,
   ){}
 }
 
@@ -11,7 +11,7 @@ export type playerType = {
 }
 
 export interface IGame {
-
+  _id: string;
   players: playerType[];
   active: Boolean;
   full: Boolean;
