@@ -10,6 +10,9 @@ import handleChatEvent from './services/chat.service';
 import handleDrawEvent from './services/draw.service';
 import * as http from 'http';
 import connectDB from './config/database';
+import gameRouter from './routes/game.route';
+import { gameClass } from './models/gameModel';
+import { handleGameStart } from './services/game.service';
 
 
 dotenv.config();
@@ -30,6 +33,8 @@ app.get('/ping', (req, res) => {
 app.use('/api/user', userRouter);
 app.use('/api/images', imageRouter);
 
+app.use('/api/game', gameRouter);
+
 const io = new Server(server, {
 	cors: {
 		origin: "*",
@@ -41,12 +46,17 @@ io.on("connection", (socket: Socket) => {
 	socket.on("chat", (arg: ClientChat) => {
 		handleChatEvent(arg, io);
 	});
-
+  
+	socket.on("gameEvent", (game: gameClass) => {
+		handleGameStart(game, io);
+  });
 	socket.on("draw", (arg: ClientDraw) => {
 		handleDrawEvent(arg, io);
-	});
+  });
 });
+
 
 server.listen(PORT, () => {
   console.log(`Socket started on port ${PORT}`);
+
 });
