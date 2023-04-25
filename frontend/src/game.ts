@@ -6,13 +6,14 @@ const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
 const createGame = "https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/game/create";
 
 
+
 async function joinGameService(user: IUser | null) {
     
     if (!user) {
         return null;
     }
     return fetch(createGame, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
