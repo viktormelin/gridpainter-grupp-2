@@ -1,4 +1,3 @@
-import { joinGame } from "./game";
 import { createHighscoresHTML } from "./highscores";
 
 export function createGameSelectHTML() {
@@ -19,11 +18,6 @@ export function createGameSelectHTML() {
 
    highscoresBtn?.addEventListener('click', function () {
       createHighscoresHTML();
-   })
-   const playBtn = document.getElementById('playBtn');
-
-   playBtn?.addEventListener('click', function () {
-      joinGame();
    })
 
    // Preparement for the menu alternatives
