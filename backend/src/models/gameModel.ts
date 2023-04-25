@@ -8,6 +8,7 @@ export class gameClass {
 }
 
 export type playerType = {
+  _id?: string,
   name?: string,
   color?: string,
 }
