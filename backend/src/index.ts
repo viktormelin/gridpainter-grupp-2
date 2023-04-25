@@ -35,7 +35,6 @@ app.use('/api/images', imageRouter);
 
 app.use('/api/game', gameRouter);
 
-connectDB();
 const io = new Server(server, {
 	cors: {
 		origin: "*",
