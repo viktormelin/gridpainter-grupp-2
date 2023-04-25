@@ -1,9 +1,8 @@
 import { createGameSelectHTML } from './game-select';
-import { IUser } from './models/IUser';
-import { fetchUser } from './utils/user';
+import { fetchUser, loginUser } from './utils/user';
 
-export function createLoginHTML() {
-  const user = fetchUser();
+export async function createLoginHTML() {
+  const user = await fetchUser();
 
   if (user) {
     sessionStorage.setItem('user', JSON.stringify(user));
@@ -23,7 +22,7 @@ export function createLoginHTML() {
     const usernameInput = document.getElementById('inputUsername') as HTMLInputElement;
     const inputError = document.getElementById('inputError') as HTMLParagraphElement;
 
-    submitBtn.addEventListener('click', function (e) {
+    submitBtn.addEventListener('click', async function (e) {
       e.preventDefault();
 
       inputError.innerText = '';
@@ -31,13 +30,14 @@ export function createLoginHTML() {
       if (usernameInput.value && usernameInput.value.length > 0) {
         const re = /^[a-zA-Z0-9\s_.-]*$/;
         if (re.test(usernameInput.value)) {
-          const user: IUser = {
-            _id: '643fdc00090040ae33fb8ff2',
-            username: usernameInput.value,
-          };
+          const user = await loginUser(usernameInput.value);
 
-          sessionStorage.setItem('user', JSON.stringify(user));
-          createGameSelectHTML();
+          if (!user) {
+            inputError.innerText = 'Try a different username';
+          } else {
+            sessionStorage.setItem('user', JSON.stringify(user));
+            createGameSelectHTML();
+          }
         } else {
           inputError.innerText = 'Username contains invalid characters';
         }
