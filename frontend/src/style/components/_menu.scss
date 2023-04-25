@@ -1,0 +1,40 @@
+.menuContainer {
+    margin-top: 10%;
+    justify-content: center;
+    align-items: center;
+
+    display: grid;
+    grid-template-areas: 
+    'savedPics  highscores'
+    'play       freePaint';
+
+    button {
+        margin: 2rem;
+
+        font-size: 1.5rem;
+
+        height: 54px;
+        width: 210px;
+
+        border-radius: 0.3rem;
+
+        background-color: #242424;
+
+        transition: all 0.3s ease-in-out;
+    }
+
+    button:hover {
+        margin: 1rem;
+
+        height: 60px;
+        width: 231px;
+
+        border: solid 0.15rem #242424;
+
+        color: #242424;
+        background-color: #f2a2dc30;
+
+        transition: all 0.3s ease-in;
+        cursor: pointer;
+    }
+}

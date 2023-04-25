@@ -42,6 +42,7 @@ export const createImage = asyncHandler(async (req: Request, res: Response): Pro
         res.status(401).json({message: 'invalid data', body: req.body})
     }
 
+
 }
 )
 
@@ -88,3 +89,4 @@ export const createImageToGame = async (game: IGame) => {
     }
 
 }
+
