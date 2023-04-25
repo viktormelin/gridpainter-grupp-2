@@ -3,4 +3,4 @@ import { createLoginHTML } from "./login";
 import { createChatHTML } from "./chat";
 
 createLoginHTML();
-//createChatHTML();
+createChatHTML();

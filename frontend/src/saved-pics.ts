@@ -71,12 +71,10 @@ function setupSwiper() {
     const nextButton = document.querySelector('.swiper-button-next');
 
     prevButton?.addEventListener('click', () => {
-        console.log('Previous button clicked');
         mySwiper.slidePrev();
     });
     
     nextButton?.addEventListener('click', () => {
-        console.log('Next button clicked');
         mySwiper.slideNext();
     });
     
