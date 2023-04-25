@@ -38,6 +38,14 @@ socket.on('gameEvent', (arg: IGame) => {
             Waiting for players... ${arg.players.length}/4
         </p>
         `
+        if (arg.full) {
+            gameAssemblyContainer.innerHTML = `
+        <p>
+            Players found! Starting game...
+        </p>
+        `
+            //Insert starting game functionality here
+        }
     }
 })
 
