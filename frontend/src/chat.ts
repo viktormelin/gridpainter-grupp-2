@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import { IServerChat } from "./models/IServerChat";
-const socket = io("http://localhost:3000");
+const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app:3000");
 
 export function createChatHTML() {
 	let main = document.querySelector('main') as HTMLElement;
