@@ -3,6 +3,7 @@ import { IServerChat } from './models/IServerChat';
 import { fetchUser } from './utils/user';
 import { IUser } from './models/IUser';
 const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app:3000");
+//const socket = io("http://localhost:3000");
 
 export function createChatHTML() {
   const user = fetchUser() as IUser;
@@ -21,7 +22,7 @@ export function createChatHTML() {
 
   sendMessageBtn.addEventListener('click', e => {
     e.preventDefault();
-    socket.emit('chat', { message: chatInput.value, user: user.username });
+    socket.emit('chat', { message: chatInput.value, user: user?.username });
     chatInput.value = '';
   });
 }
