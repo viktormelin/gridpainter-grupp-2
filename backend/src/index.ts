@@ -26,7 +26,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
+app.get('/ping', (req, res) => {
   res.send('Hello World');
 });
 
@@ -54,11 +54,14 @@ io.on("connection", (socket: Socket) => {
 		handleDrawEvent(arg, io);
   });
 });
-server.listen(3000, () => {
-  console.log(`Socket started on port 3000`);
+
+
+server.listen(PORT, () => {
+  console.log(`Socket started on port ${PORT}`);
+
 });
 
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-  connectDB();
-});
+// app.listen(PORT, () => {
+//   console.log(`Server started on port ${PORT}`);
+//   connectDB();
+// });
