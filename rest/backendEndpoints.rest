@@ -30,6 +30,22 @@ Content-Type: application/json
 
 ###
 
+// Return an array of users from id's in body.
+// Insert one or more user-id's in users array.
+// If user found and user count is matching, users are returned.
+POST http://localhost:5000/api/user/get
+Content-Type: application/json
+
+{
+    "users": [
+        "644794658aa10dadf4a5370e",
+        "644796624ebf57a7f309cda7",
+        "644798276b28272a4cf8d59f"
+    ]
+}
+
+###
+
 // Route to save drawn images from game and free painting views.
 POST http://localhost:5000/api/images/add
 Content-Type: application/json
