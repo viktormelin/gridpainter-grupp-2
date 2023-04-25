@@ -22,7 +22,7 @@ export function createSavedPicsHTML() {
           <img src="paint-logo.png" alt="Image 1">
         </div>
         <div class="swiper-slide">
-          <img src="test.png" alt="Image 2">
+          <img src="bild.jpg" alt="Image 2">
         </div>        
         <div class="swiper-slide">
           <img src="icon.png" alt="Image 3">
@@ -35,19 +35,24 @@ export function createSavedPicsHTML() {
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
 
-      <div class="swiper-scrollbar"></div>
-    </div>`;
+    </div>
+    <button id="backToMenuBtn">Back to menu</button>`;
 
     const backToMenuBtn = document.getElementById('backToMenuBtn');
 
     backToMenuBtn?.addEventListener('click', function () {
         createGameSelectHTML();
     })
+
+    setupSwiper();
 }
 
 
 function setupSwiper() {
-    const mySwiper = new Swiper('.swiper-container', {
+    const mySwiper = new Swiper('.swiper', {
+        speed: 300,
+        spaceBetween: 50,
+        slidesPerView: 1,
         
         direction: 'horizontal',
         loop: true,
@@ -60,21 +65,22 @@ function setupSwiper() {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-
-        scrollbar: {
-          el: '.swiper-scrollbar',
-        },
       });
 
     const prevButton = document.querySelector('.swiper-button-prev');
-    prevButton?.addEventListener('click', () => mySwiper.slidePrev());
-
-    console.log(prevButton);
-
     const nextButton = document.querySelector('.swiper-button-next');
-    nextButton?.addEventListener('click', () => mySwiper.slideNext());
+
+    prevButton?.addEventListener('click', () => {
+        console.log('Previous button clicked');
+        mySwiper.slidePrev();
+    });
+    
+    nextButton?.addEventListener('click', () => {
+        console.log('Next button clicked');
+        mySwiper.slideNext();
+    });
+    
 
 }
 
 
-setupSwiper();
