@@ -1,8 +1,8 @@
 import { io } from 'socket.io-client';
 import { IServerChat } from './models/IServerChat';
 import { fetchUser } from './utils/user';
-const socket = io('https://gridpainter-grupp-2-839p7.ondigitalocean.app');
-//const socket = io("http://localhost:3000");
+const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
+//const socket = io("http://localhost:5000");
 
 export async function createChatHTML() {
   const user = await fetchUser();
