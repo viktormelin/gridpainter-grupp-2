@@ -1,3 +1,9 @@
+import Swiper, { Navigation, Pagination } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 import { createGameSelectHTML } from "./game-select";
 
 
@@ -8,12 +14,29 @@ export function createSavedPicsHTML() {
     <div id="h2Background">
       <h2>Saved pictures</h2>
     </div>
-    <div class="savedPics">
-      <div class="slideShow"></div>
-      <button id="prevBtn">Prev</button>
-      <button id="nextBtn">Next</button>
-    </div>
-    <button id="backToMenuBtn">Back to menu</button>`;
+    <div class="swiper">
+  
+      <div class="swiper-wrapper">
+    
+        <div class="swiper-slide">
+          <img src="paint-logo.png" alt="Image 1">
+        </div>
+        <div class="swiper-slide">
+          <img src="test.png" alt="Image 2">
+        </div>        
+        <div class="swiper-slide">
+          <img src="icon.png" alt="Image 3">
+        </div>
+        ...
+     </div>
+
+      <div class="swiper-pagination"></div>
+ 
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <div class="swiper-scrollbar"></div>
+    </div>`;
 
     const backToMenuBtn = document.getElementById('backToMenuBtn');
 
@@ -22,3 +45,36 @@ export function createSavedPicsHTML() {
     })
 }
 
+
+function setupSwiper() {
+    const mySwiper = new Swiper('.swiper-container', {
+        
+        direction: 'horizontal',
+        loop: true,
+      
+        pagination: {
+          el: '.swiper-pagination',
+        },
+      
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+      });
+
+    const prevButton = document.querySelector('.swiper-button-prev');
+    prevButton?.addEventListener('click', () => mySwiper.slidePrev());
+
+    console.log(prevButton);
+
+    const nextButton = document.querySelector('.swiper-button-next');
+    nextButton?.addEventListener('click', () => mySwiper.slideNext());
+
+}
+
+
+setupSwiper();
