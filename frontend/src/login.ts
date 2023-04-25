@@ -1,18 +1,9 @@
 import { createGameSelectHTML } from './game-select';
 import { IUser } from './models/IUser';
-
-const isUserLoggedIn = () => {
-  const data = sessionStorage.getItem('user');
-
-  if (data) {
-    return JSON.parse(data) as IUser;
-  }
-
-  return null;
-};
+import { fetchUser } from './utils/user';
 
 export function createLoginHTML() {
-  const user = isUserLoggedIn();
+  const user = fetchUser();
 
   if (user) {
     sessionStorage.setItem('user', JSON.stringify(user));
