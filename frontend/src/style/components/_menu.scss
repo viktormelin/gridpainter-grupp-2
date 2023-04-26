@@ -38,3 +38,17 @@
         cursor: pointer;
     }
 }
+
+.gameAssemblyContainer {
+    background-color: #242424;
+    position: fixed;
+    width: 500px;
+    height: 240px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    p {
+        font-size: 32px;
+    }
+}
