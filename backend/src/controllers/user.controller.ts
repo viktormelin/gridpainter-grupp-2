@@ -1,12 +1,25 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/UserModel';
 
+let i = 0;
+
+const colors = [
+	"#00FFFF",
+    "#808080",
+    "#000080",
+    "#C0C0C0",
+];
+
 export const addUser = asyncHandler(async (req, res) => {	
   try {
-    const userExists = await User.find(req.body)
+    const userExists = await User.find({ username: req.body.username })
+
+	const color = colors[i];
+	i = (i + 1) % 4;
+
     
     if (userExists.length === 0) {
-      const savedUser = await User.create(req.body)
+      const savedUser = await User.create({ username: req.body.username, color: color })
       res.status(200).json(savedUser)
     } else {
       res.status(401).json({message: 'username already exists'})

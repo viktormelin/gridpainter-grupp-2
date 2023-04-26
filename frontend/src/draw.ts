@@ -1,29 +1,30 @@
 import { io } from "socket.io-client";
 import { IServerDrawMessage } from "./models/IServerDrawMessage";
-const socket = io("http://localhost:5000");
+//const socket = io("http://localhost:5000");
+const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
 
 const boardSizeX = 15;
 const boardSizeY = 15;
 
-export function createGameHTML() {
-	let loggedInUser = sessionStorage.getItem('name');
+let user = JSON.parse(sessionStorage.getItem('user') || "{}");
 
-	let boardTable = document.createElement("table")
+export function createGameHTML() {
+	let boardTable = document.createElement("table");
 	boardTable.className = "board";
-	boardTable.id = "bigBoard"
+	boardTable.id = "bigBoard";
 
 	for (let i = 0; i < boardSizeY; i++) {
-		let boardTr = document.createElement("tr")
+		let boardTr = document.createElement("tr");
 		boardTr.className = "new-tr";
 
 		for (let j = 0; j < boardSizeX; j++) {
-			let boardTd = document.createElement("td")
+			let boardTd = document.createElement("td");
 			boardTd.className = "new-td";
 			boardTd.id = JSON.stringify(15 * i + j);
 			boardTr.appendChild(boardTd);
 
 			boardTd.addEventListener('click', () => {
-				socket.emit("draw", { place: boardTd.id, user: loggedInUser });
+				socket.emit("draw", { place: boardTd.id, userId: user?._id, gameId: ""});
 			})			
 		}
 		boardTable.appendChild(boardTr);
@@ -41,3 +42,4 @@ socket.on("draw", (msg: IServerDrawMessage) => {
 		allSquares[i].style.background = msg.session[i];
 	}
 });
+
