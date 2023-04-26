@@ -1,3 +1,4 @@
+import { joinGame } from "./game";
 import { createHighscoresHTML } from "./highscores";
 import { createSavedPicsHTML } from "./saved-pics";
 
@@ -17,11 +18,14 @@ export function createGameSelectHTML() {
 
    const highscoresBtn = document.getElementById('highscoresBtn');
    const savedPicsBtn = document.getElementById('savedPicsBtn');
+   const playBtn = document.getElementById('playBtn');
 
    highscoresBtn?.addEventListener('click', function () {
       createHighscoresHTML();
    })
-
+   playBtn?.addEventListener('click', function () {
+      joinGame();
+   })
    
    savedPicsBtn?.addEventListener('click', function () {
       createSavedPicsHTML();
