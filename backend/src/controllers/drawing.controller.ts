@@ -7,7 +7,10 @@ import asyncHandler from 'express-async-handler';
 //   };
 
 export const addDrawing = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+ 
   if (true) {
+    console.log(req.body);
+    
     const newDrawing = await Drawing.create(req.body);
     console.log(newDrawing);
 

@@ -46,6 +46,35 @@ Content-Type: application/json
 
 ###
 
+// Route to add new drawing to drawings collection db
+
+POST http://localhost:5000/api/drawing/add
+Content-Type: application/json
+
+{
+    "users":   [
+        {
+            "user_id": "644794658aa10dadf4a5370e",
+            "color": "#87YY65"
+        },
+        {
+            "user_id": "644796624ebf57a7f309cda7",
+            "color": "#87YY65"
+        },
+        {
+            "user_id": "644798276b28272a4cf8d59f",
+            "color": "#87YY65"
+        },
+        {
+            "user_id": "6447cff16613caab9ecaad01",
+            "color": "#87YY65"
+        }
+    ],
+    "image_id": "643fdc00090040ae33fb8ff2"
+}
+
+###
+
 // Route to save drawn images from game and free painting views.
 POST http://localhost:5000/api/images/add
 Content-Type: application/json
