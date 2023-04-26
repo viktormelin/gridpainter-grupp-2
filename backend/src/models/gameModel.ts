@@ -3,7 +3,7 @@ import { ObjectId, Schema, model, Document } from 'mongoose';
 
 export class gameClass {
   constructor(
-    public gameID: string,
+    public _id: string,
   ){}
 }
 
