@@ -1,6 +1,7 @@
 export class ClientDrawMessage {
 	constructor(
 		public place: number,
-		public user: string
+		public userId: string,
+		public gameId: string
 	){}
 }

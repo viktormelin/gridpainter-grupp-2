@@ -28,9 +28,7 @@ async function joinGameService(arg: IUser | null): Promise<IGame> {
 }
 
 
-socket.on('gameEvent', (arg: IGame) => {
-    console.log(arg);
-    
+socket.on('gameEvent', (arg: IGame) => {   
     const gameAssemblyContainer = document.querySelector('.gameAssemblyContainer')
     if (gameAssemblyContainer && arg) {
         gameAssemblyContainer.innerHTML = `
@@ -57,7 +55,6 @@ export function gameAssemblyHTML(): void {
 }
 
 export async function joinGame(): Promise<void> {
-    
     const game: IGame = await joinGameService(await fetchUser());
     const gameSocket = new gameClass(game._id);
     console.log(gameSocket);
