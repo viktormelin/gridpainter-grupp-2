@@ -1,8 +1,8 @@
-import { ClientChat } from "../models/ClientChat";
-import { ServerChat } from "../models/ServerChat";
+import { ClientChatMessage } from "../models/ClientChatMessage";
+import { ServerChatMessage } from "../models/ServerChatMessage";
 
-export default function handleChatEvent(arg: ClientChat, io: any) {
+export default function handleChatEvent(arg: ClientChatMessage, io: any) {
 	console.log('received chat event');
 	
-	io.emit('chat', new ServerChat(arg.message, arg.user, "green"))
+	io.emit('chat', new ServerChatMessage(arg.message, arg.user, "green"))
 }

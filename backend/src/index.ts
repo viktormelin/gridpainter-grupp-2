@@ -4,8 +4,8 @@ import * as dotenv from 'dotenv';
 import userRouter from './routes/user.route';
 import imageRouter from './routes/image.route';
 import { Socket, Server } from "socket.io";
-import { ClientChat } from './models/ClientChat';
-import { ClientDraw } from './models/ClientDraw';
+import { ClientChatMessage } from './models/ClientChatMessage';
+import { ClientDrawMessage } from './models/ClientDrawMessage';
 import handleChatEvent from './services/chat.service';
 import handleDrawEvent from './services/draw.service';
 import * as http from 'http';
@@ -43,14 +43,14 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket: Socket) => {
-	socket.on("chat", (arg: ClientChat) => {
+	socket.on("chat", (arg: ClientChatMessage) => {
 		handleChatEvent(arg, io);
 	});
   
 	socket.on("gameEvent", (game: gameClass) => {
 		handleGameStart(game, io);
   });
-	socket.on("draw", (arg: ClientDraw) => {
+	socket.on("draw", (arg: ClientDrawMessage) => {
 		handleDrawEvent(arg, io);
   });
 });
@@ -58,5 +58,5 @@ io.on("connection", (socket: Socket) => {
 
 server.listen(PORT, () => {
   console.log(`Socket started on port ${PORT}`);
-
+  connectDB();
 });
