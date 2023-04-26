@@ -36,7 +36,6 @@ export function createGameSelectHTML() {
    
    freePaintBtn?.addEventListener('click', function () {
 	let main = document.querySelector('main') as HTMLElement;
-	main.innerHTML = "";
 	createGameHTML();
 	createChatHTML();
    })
