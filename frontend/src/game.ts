@@ -55,7 +55,7 @@ export function gameAssemblyHTML(): void {
 }
 
 export async function joinGame(): Promise<void> {
-    const game: IGame = await joinGameService(fetchUser());
+    const game: IGame = await joinGameService(await fetchUser());
     const gameSocket = new gameClass(game._id);
     console.log(gameSocket);
     socket.emit('gameEvent', gameSocket);
