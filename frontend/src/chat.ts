@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-import { IServerChat } from './models/IServerChat';
+import { IServerChatMessage } from './models/IServerChatMessage';
 import { fetchUser } from './utils/user';
 const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
 //const socket = io("http://localhost:5000");
@@ -26,7 +26,7 @@ export async function createChatHTML() {
   });
 }
 
-socket.on('chat', (arg: IServerChat) => {
+socket.on('chat', (arg: IServerChatMessage) => {
   let chatOutput = document.getElementById('chatOutput') as HTMLDivElement;
 
   chatOutput.innerHTML += /*html*/ `

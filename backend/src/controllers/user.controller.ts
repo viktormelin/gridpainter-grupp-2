@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/UserModel';
 
-export const addUser = asyncHandler(async (req, res) => {
+export const addUser = asyncHandler(async (req, res) => {	
   try {
     const userExists = await User.find(req.body)
     

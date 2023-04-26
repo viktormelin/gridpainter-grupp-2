@@ -1,4 +1,4 @@
-export class ServerChat {
+export class ServerChatMessage {
 	constructor(
 		public message: string,
 		public user: string,

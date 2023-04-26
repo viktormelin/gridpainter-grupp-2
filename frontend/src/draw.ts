@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
-import { IServerDraw } from "./models/IServerDraw";
-const socket = io("http://localhost:3000");
+import { IServerDrawMessage } from "./models/IServerDrawMessage";
+const socket = io("http://localhost:5000");
 
 const boardSizeX = 15;
 const boardSizeY = 15;
@@ -23,7 +23,7 @@ export function createGameHTML() {
 			boardTr.appendChild(boardTd);
 
 			boardTd.addEventListener('click', () => {
-				socket.emit("draw", { id: boardTd.id, user: loggedInUser });
+				socket.emit("draw", { place: boardTd.id, user: loggedInUser });
 			})			
 		}
 		boardTable.appendChild(boardTr);
@@ -34,8 +34,10 @@ export function createGameHTML() {
 	main.appendChild(boardTable);
 }
 
-socket.on("draw", (arg: IServerDraw) => {
-	let boardTd = document.getElementById(arg.id) as HTMLTableCellElement;
+socket.on("draw", (msg: IServerDrawMessage) => {
+	let allSquares = document.getElementsByClassName("new-td") as HTMLCollectionOf<HTMLTableCellElement>;
 
-	boardTd.style.background = arg.color;
+	for (let i = 0; i < msg.session.length; i++) {
+		allSquares[i].style.background = msg.session[i];
+	}
 });

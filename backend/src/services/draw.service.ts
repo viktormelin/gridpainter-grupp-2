@@ -1,6 +1,12 @@
-import { ClientDraw } from "../models/ClientDraw";
-import { ServerDraw } from "../models/ServerDraw";
+import { ClientDrawMessage } from "../models/ClientDrawMessage";
+import { GameSession } from "../models/GameSession";
+import { ServerDrawMessage } from "../models/ServerDrawMessage";
 
-export default function handleDrawEvent(arg: ClientDraw, io: any) {
-	io.emit('draw', new ServerDraw(arg.id, "red"))
+let gameSession = new GameSession(15);
+
+export default function handleDrawEvent(msg: ClientDrawMessage, io: any) {
+	console.log(msg);
+	
+	gameSession.placeColor(msg.place, "#808080")
+	io.emit('draw', new ServerDrawMessage(gameSession.currentState))
 }
