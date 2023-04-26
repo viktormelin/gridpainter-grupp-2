@@ -42,7 +42,7 @@ const giveColour = () => {
 export const createGame = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const player: playerType = {
         _id: req.body._id,
-        name: req.body.username,
+        name: req.body.name,
         color: giveColour()
     }
     Game.findOne().deleteOne();

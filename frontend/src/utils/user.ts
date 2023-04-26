@@ -1,11 +1,45 @@
 import { IUser } from '../models/IUser';
 
-export const fetchUser = () => {
+const USER_URL = 'http://localhost:5000/api/user';
+
+export const fetchUser = async () => {
   const data = sessionStorage.getItem('user');
 
   if (data) {
-    return JSON.parse(data) as IUser;
+    const user = JSON.parse(data);
+
+    if (user) {
+      const response = await fetch(`${USER_URL}/get`, {
+        method: 'POST',
+        body: JSON.stringify({ users: [user] }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+
+      return data[0] as IUser;
+    }
   }
 
   return null;
+};
+
+export const loginUser = async (username: string) => {
+  const response = await fetch(`${USER_URL}/add`, {
+    method: 'POST',
+    body: JSON.stringify({ username }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const data = await response.json();
+
+  if (data.message) {
+    return null;
+  } else {
+    return data as IUser;
+  }
 };
