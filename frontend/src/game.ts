@@ -2,10 +2,10 @@ import { io } from 'socket.io-client';
 import { IGame, gameClass } from './models/iGame';
 import { IUser } from './models/IUser';
 import { fetchUser } from './utils/user';
-const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
-//const socket = io("localhost:5000");
-const createGame = "https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/game/create";
-//const createGame = "http://localhost:5000/api/game/create";
+//const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
+const socket = io("localhost:5000");
+//const createGame = "https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/game/create";
+const createGame = "http://localhost:5000/api/game/create";
 
 async function joinGameService(arg: IUser | null): Promise<IGame> {
     
@@ -62,3 +62,4 @@ export async function joinGame(): Promise<void> {
     
     gameAssemblyHTML();
 }
+

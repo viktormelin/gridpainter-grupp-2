@@ -1,14 +1,17 @@
 import { io } from "socket.io-client";
 import { IServerDrawMessage } from "./models/IServerDrawMessage";
-//const socket = io("http://localhost:5000");
-const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
+import { reset } from "./utils/draw";
+const socket = io("http://localhost:5000");
+//const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
 
 const boardSizeX = 15;
 const boardSizeY = 15;
 
-let user = JSON.parse(sessionStorage.getItem('user') || "{}");
+let main = document.querySelector("main") as HTMLElement;
 
 export function createGameHTML() {
+	let user = JSON.parse(sessionStorage.getItem('user') || "{}");
+
 	let boardTable = document.createElement("table");
 	boardTable.className = "board";
 	boardTable.id = "bigBoard";
@@ -24,20 +27,31 @@ export function createGameHTML() {
 			boardTr.appendChild(boardTd);
 
 			boardTd.addEventListener('click', () => {
+				console.log('sending draw event');
+				console.log(user);
+				
 				socket.emit("draw", { place: boardTd.id, userId: user?._id, gameId: ""});
 			})			
 		}
 		boardTable.appendChild(boardTr);
 	}
+	
+	let resetDrawBtn = document.createElement('button');
+	resetDrawBtn.id = "resetDrawBtn";
+	resetDrawBtn.innerText = "Reset painting";
 
-	let main = document.querySelector("main") as HTMLElement;
+	main.append(resetDrawBtn, boardTable);
 
-	main.appendChild(boardTable);
+	resetDrawBtn.addEventListener('click', async () => {
+		await reset();
+	})
 }
 
 socket.on("draw", (msg: IServerDrawMessage) => {
 	let allSquares = document.getElementsByClassName("new-td") as HTMLCollectionOf<HTMLTableCellElement>;
 
+	console.log('recieve draw');
+	
 	for (let i = 0; i < msg.session.length; i++) {
 		allSquares[i].style.background = msg.session[i];
 	}
