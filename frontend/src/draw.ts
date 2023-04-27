@@ -1,41 +1,54 @@
 import { io } from "socket.io-client";
-import { IServerDraw } from "./models/IServerDraw";
-const socket = io("http://localhost:3000");
+import { IServerDrawMessage } from "./models/IServerDrawMessage";
+import { reset } from "./utils/draw";
+//const socket = io("http://localhost:5000");
+const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
 
 const boardSizeX = 15;
 const boardSizeY = 15;
 
-export function createGameHTML() {
-	let loggedInUser = sessionStorage.getItem('name');
+let main = document.querySelector("main") as HTMLElement;
 
-	let boardTable = document.createElement("table")
+export function createGameHTML() {
+	let user = JSON.parse(sessionStorage.getItem('user') || "{}");
+
+	let boardTable = document.createElement("table");
 	boardTable.className = "board";
-	boardTable.id = "bigBoard"
+	boardTable.id = "bigBoard";
 
 	for (let i = 0; i < boardSizeY; i++) {
-		let boardTr = document.createElement("tr")
+		let boardTr = document.createElement("tr");
 		boardTr.className = "new-tr";
 
 		for (let j = 0; j < boardSizeX; j++) {
-			let boardTd = document.createElement("td")
+			let boardTd = document.createElement("td");
 			boardTd.className = "new-td";
 			boardTd.id = JSON.stringify(15 * i + j);
 			boardTr.appendChild(boardTd);
 
-			boardTd.addEventListener('click', () => {
-				socket.emit("draw", { id: boardTd.id, user: loggedInUser });
+			boardTd.addEventListener('click', () => {				
+				socket.emit("draw", { place: boardTd.id, userId: user?._id, gameId: ""});
 			})			
 		}
 		boardTable.appendChild(boardTr);
 	}
+	
+	let resetDrawBtn = document.createElement('button');
+	resetDrawBtn.id = "resetDrawBtn";
+	resetDrawBtn.innerText = "Reset painting";
 
-	let main = document.querySelector("main") as HTMLElement;
+	main.append(resetDrawBtn, boardTable);
 
-	main.appendChild(boardTable);
+	resetDrawBtn.addEventListener('click', async () => {
+		await reset();
+	})
 }
 
-socket.on("draw", (arg: IServerDraw) => {
-	let boardTd = document.getElementById(arg.id) as HTMLTableCellElement;
-
-	boardTd.style.background = arg.color;
+socket.on("draw", (msg: IServerDrawMessage) => {
+	let allSquares = document.getElementsByClassName("new-td") as HTMLCollectionOf<HTMLTableCellElement>;
+	
+	for (let i = 0; i < msg.session.length; i++) {
+		allSquares[i].style.background = msg.session[i];
+	}
 });
+

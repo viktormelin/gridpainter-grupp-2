@@ -1,4 +1,8 @@
+import { createChatHTML } from "./chat";
+import { createGameHTML } from "./draw";
+import { joinGame } from "./game";
 import { createHighscoresHTML } from "./highscores";
+import { createSavedPicsHTML } from "./saved-pics";
 
 export function createGameSelectHTML() {
     const main = document.querySelector('main') as HTMLElement;
@@ -15,30 +19,23 @@ export function createGameSelectHTML() {
    </div>`;
 
    const highscoresBtn = document.getElementById('highscoresBtn');
+   const savedPicsBtn = document.getElementById('savedPicsBtn');
+   const playBtn = document.getElementById('playBtn');
+   const freePaintBtn = document.getElementById('freePaintBtn');
 
    highscoresBtn?.addEventListener('click', function () {
       createHighscoresHTML();
    })
-
-   // Preparement for the menu alternatives
-
-   /*
-   const savedPicsBtn = document.getElementById('savedPicsBtn');
-   
-   const playBtn = document.getElementById('playBtn');
-   const freePaintBtn = document.getElementById('freePaintBtn');
-
-   savedPicsBtn?.addEventListener('click', function () {
-
-   })
-
-
    playBtn?.addEventListener('click', function () {
-
+      joinGame();
    })
-
+   
+   savedPicsBtn?.addEventListener('click', function () {
+      createSavedPicsHTML();
+   }) 
+   
    freePaintBtn?.addEventListener('click', function () {
-
+	createChatHTML();
+	createGameHTML();
    })
-   */
 }
