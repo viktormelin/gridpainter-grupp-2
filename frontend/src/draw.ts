@@ -1,15 +1,16 @@
 import { io } from "socket.io-client";
 import { IServerDrawMessage } from "./models/IServerDrawMessage";
-import { reset } from "./utils/draw";
-//const socket = io("http://localhost:5000");
-const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
+import { reset, showTemplate } from "./utils/draw";
+const socket = io(`${import.meta.env.VITE_BASE_URI}`);
+
+let ignoreUpdates = false;
 
 const boardSizeX = 15;
 const boardSizeY = 15;
 
 let main = document.querySelector("main") as HTMLElement;
 
-export function createGameHTML() {
+export function createGameHTML(freePaint: boolean) {
 	let user = JSON.parse(sessionStorage.getItem('user') || "{}");
 
 	let boardTable = document.createElement("table");
@@ -26,27 +27,54 @@ export function createGameHTML() {
 			boardTd.id = JSON.stringify(15 * i + j);
 			boardTr.appendChild(boardTd);
 
-			boardTd.addEventListener('click', () => {				
-				socket.emit("draw", { place: boardTd.id, userId: user?._id, gameId: ""});
-			})			
+			boardTd.addEventListener('click', () => {
+				if (ignoreUpdates) {
+					return;
+				}
+
+				socket.emit("draw", { place: boardTd.id, userId: user?._id, gameId: "" });
+			})
 		}
 		boardTable.appendChild(boardTr);
 	}
-	
+
 	let resetDrawBtn = document.createElement('button');
 	resetDrawBtn.id = "resetDrawBtn";
+	resetDrawBtn.className = "reset-draw-btn";
 	resetDrawBtn.innerText = "Reset painting";
-
-	main.append(resetDrawBtn, boardTable);
 
 	resetDrawBtn.addEventListener('click', async () => {
 		await reset();
 	})
+
+	main.append(resetDrawBtn, boardTable);
+
+	if (!freePaint) {
+		showTemplate(user._id);
+	}
 }
 
 socket.on("draw", (msg: IServerDrawMessage) => {
+	if (ignoreUpdates) {
+		return;
+	}
+
+	let user = JSON.parse(sessionStorage.getItem('user') || "{}");
+
+	if (msg.userId != null) {
+
+		if (msg.userId == user._id) {
+			ignoreUpdates = true;
+			setTimeout(() => {
+				ignoreUpdates = false;
+			}, 9500);
+		} else {
+			return;
+		}
+	}
+
 	let allSquares = document.getElementsByClassName("new-td") as HTMLCollectionOf<HTMLTableCellElement>;
-	
+
 	for (let i = 0; i < msg.session.length; i++) {
 		allSquares[i].style.background = msg.session[i];
 	}

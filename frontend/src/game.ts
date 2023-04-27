@@ -2,10 +2,11 @@ import { io } from 'socket.io-client';
 import { IGame, gameClass } from './models/iGame';
 import { IUser } from './models/IUser';
 import { fetchUser } from './utils/user';
-const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
-//const socket = io("localhost:5000");
-const createGame = "https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/game/create";
-//const createGame = "http://localhost:5000/api/game/create";
+import { createChatHTML } from './chat';
+import { createGameHTML } from './draw';
+
+const socket = io(`${import.meta.env.VITE_BASE_URI}`);
+const createGame = `${import.meta.env.VITE_BASE_URI}/api/game/create`;
 
 async function joinGameService(arg: IUser | null): Promise<IGame> {
     
@@ -42,7 +43,10 @@ socket.on('gameEvent', (arg: IGame) => {
             Players found! Starting game...
         </p>
         `
-            //Insert starting game functionality here
+		gameAssemblyContainer.classList.remove('gameAssemblyContainer');
+		gameAssemblyContainer.innerHTML = "";
+		createChatHTML();
+		createGameHTML(false);
         }
     }
 })

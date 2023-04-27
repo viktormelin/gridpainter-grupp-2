@@ -1,5 +1,4 @@
-//const DRAW_URL = 'http://localhost:5000/api/draw';
-const DRAW_URL = 'https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/draw';
+const DRAW_URL = `${import.meta.env.VITE_BASE_URI}/api/draw`;
 
 export const reset = async () => {
 	const response = await fetch(`${DRAW_URL}/reset`, {
@@ -13,4 +12,23 @@ export const reset = async () => {
 	} else {
 	  return null;
 	}
-  };
+};
+
+export const showTemplate = async (userId: string) => {
+	const response = await fetch(`${DRAW_URL}/showTemplate`, {
+	  method: 'POST',
+	  body: JSON.stringify({ userId }),
+	  headers: {
+		'Content-Type': 'application/json',
+	  },
+	});
+  
+	const data = await response.json();	
+  
+	if (data.message) {
+	  return null;
+	} else {
+	  return null;
+	}
+};
+
