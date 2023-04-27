@@ -279,3 +279,10 @@ Content-Type: application/json
       "224": "#161616"
     }
 }
+
+###
+
+POST http://localhost:5000/api/draw/reset
+Content-Type: application/json
+
+{}
