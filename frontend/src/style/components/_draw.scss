@@ -11,10 +11,10 @@
 .game-container {
     display: grid;
     grid-template-areas: 
-    'board board chat'
-    'board board chat'
-    'board board chat'
-    'doneBtn resetBtn chat';
+    'board board board chat'
+    'board board board chat'
+    'board board board chat'
+    'doneBtn resetBtn timer chat';
 
     height: 87vh;
 
@@ -124,4 +124,15 @@ button:hover {
         min-width: 30vw;
         min-height: 60vh;
     }
+}
+.gameTimer {
+    grid-area: timer;
+    position: relative;
+    left: -15rem;
+    z-index: 20;
+    height: 54px;
+    width: 210px;
+    background-color: #242424;
+    text-align: center;
+    font-size: 2rem;
 }

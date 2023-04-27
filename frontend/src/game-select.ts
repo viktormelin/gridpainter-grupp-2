@@ -10,7 +10,7 @@ export function createGameSelectHTML() {
 
 	const pageHeader = document.getElementById('header');
 	pageHeader?.classList.remove('smallHeader');
-
+	
 	main.innerHTML = `
     <div class="menuContainer">
       <button id="savedPicsBtn">Saved pictures</button>
