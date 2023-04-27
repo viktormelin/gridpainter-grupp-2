@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
 import { IServerDrawMessage } from "./models/IServerDrawMessage";
 import { reset, showTemplate } from "./utils/draw";
+import { createGameSelectHTML } from "./game-select";
 const socket = io(`${import.meta.env.VITE_BASE_URI}`);
 
 let ignoreUpdates = false;
@@ -101,10 +102,19 @@ socket.on("gameState", () => {
 	overlay.id = 'overlay';
 
 	let scoreBoard = document.createElement('div');
-	scoreBoard.id = 'scoreboard';
-	scoreBoard.innerHTML= `Test`;
+	scoreBoard.id = 'scoreBoard';
+	scoreBoard.innerHTML= `ADD CALCULATED SCORE HERE`;
 
+	let backToMenuBtn = document.createElement('button');
+	backToMenuBtn.id = 'backToMenuBtn'
+	backToMenuBtn.innerHTML = 'Back to menu'
+
+	scoreBoard.append(backToMenuBtn);
 	overlay.append(scoreBoard);
 	main.append(overlay);
+
+	backToMenuBtn?.addEventListener('click', function () {
+        createGameSelectHTML();
+    })
 	
 })
