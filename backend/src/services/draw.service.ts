@@ -5,12 +5,8 @@ import User from "../models/UserModel";
 
 let gameSession = new GameSession(15);
 
-export async function handleDrawEvent(msg: ClientDrawMessage, io: any) {
-	console.log('received draw event');
-	console.log(msg);
-	
+export async function handleDrawEvent(msg: ClientDrawMessage, io: any) {	
 	const user = await User.findOne({_id: msg.userId});
-	console.log(user);
 	
 	if (user == null) {
 		return;

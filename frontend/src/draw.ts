@@ -1,8 +1,8 @@
 import { io } from "socket.io-client";
 import { IServerDrawMessage } from "./models/IServerDrawMessage";
 import { reset } from "./utils/draw";
-const socket = io("http://localhost:5000");
-//const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
+//const socket = io("http://localhost:5000");
+const socket = io("https://gridpainter-grupp-2-839p7.ondigitalocean.app");
 
 const boardSizeX = 15;
 const boardSizeY = 15;
@@ -26,10 +26,7 @@ export function createGameHTML() {
 			boardTd.id = JSON.stringify(15 * i + j);
 			boardTr.appendChild(boardTd);
 
-			boardTd.addEventListener('click', () => {
-				console.log('sending draw event');
-				console.log(user);
-				
+			boardTd.addEventListener('click', () => {				
 				socket.emit("draw", { place: boardTd.id, userId: user?._id, gameId: ""});
 			})			
 		}
@@ -49,8 +46,6 @@ export function createGameHTML() {
 
 socket.on("draw", (msg: IServerDrawMessage) => {
 	let allSquares = document.getElementsByClassName("new-td") as HTMLCollectionOf<HTMLTableCellElement>;
-
-	console.log('recieve draw');
 	
 	for (let i = 0; i < msg.session.length; i++) {
 		allSquares[i].style.background = msg.session[i];

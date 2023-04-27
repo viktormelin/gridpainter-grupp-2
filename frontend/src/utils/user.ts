@@ -1,7 +1,7 @@
 import { IUser } from '../models/IUser';
 
-const USER_URL = 'http://localhost:5000/api/user';
-//const USER_URL = 'https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/user';
+//const USER_URL = 'http://localhost:5000/api/user';
+const USER_URL = 'https://gridpainter-grupp-2-839p7.ondigitalocean.app/api/user';
 export const fetchUser = async () => {
   const data = sessionStorage.getItem('user');
 
