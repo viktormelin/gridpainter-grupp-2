@@ -3,6 +3,7 @@ import cors from 'cors';
 import * as dotenv from 'dotenv';
 import userRouter from './routes/user.route';
 import imageRouter from './routes/image.route';
+import drawingRouter from './routes/drawing.route';
 import { Socket, Server } from "socket.io";
 import { ClientChatMessage } from './models/ClientChatMessage';
 import { ClientDrawMessage } from './models/ClientDrawMessage';
@@ -14,7 +15,6 @@ import gameRouter from './routes/game.route';
 import { gameClass } from './models/gameModel';
 import { handleGameStart } from './services/game.service';
 import drawRouter from './routes/draw.route';
-
 
 dotenv.config();
 
@@ -33,6 +33,7 @@ app.get('/ping', (req, res) => {
 
 app.use('/api/user', userRouter);
 app.use('/api/images', imageRouter);
+app.use('/api/drawing', drawingRouter);
 app.use('/api/draw', drawRouter);
 app.use('/api/game', gameRouter);
 
@@ -60,6 +61,6 @@ io.on("connection", (socket: Socket) => {
 
 
 server.listen(PORT, () => {
-	console.log(`Socket started on port ${PORT}`);
-	connectDB();
+  console.log(`Socket started on port ${PORT}`);
+  connectDB();
 });
