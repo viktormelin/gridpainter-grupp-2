@@ -1,7 +1,5 @@
 import { Schema, model } from 'mongoose';
 
-//const IdSchema = 
-
 const drawingSchema = new Schema({
   users: {
     type: [
@@ -22,11 +20,8 @@ const drawingSchema = new Schema({
   },
 
   image_id: {
-    type: new Schema({
       type: Schema.Types.ObjectId,
-      required: true,
-      _id: false
-    }), 
+      required: true
   }
 })
 
