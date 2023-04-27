@@ -1,32 +1,15 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/UserModel';
+import { colors } from '../services/draw.service';
 
 let i = 0;
-
-const colors = [
-    "#00FFFF",
-    "#808080",
-    "#000080",
-    "#C0C0C0",
-    "#000000",
-    "#008000",
-    "#808000",
-    "#008080",
-    "#0000FF",
-    "#00FF00",
-    "#800080",
-    "#FF00FF",
-    "#800000",
-    "#FF0000",
-    "#FFFF00",
-]
 
 export const addUser = asyncHandler(async (req, res) => {	
   try {
     const userExists = await User.find({ username: req.body.username })
 
 	const color = colors[i];
-	i = (i + 1) % 15;
+	i = (i + 1) % colors.length;
 
     
     if (userExists.length === 0) {
