@@ -11,10 +11,10 @@
 .game-container {
     display: grid;
     grid-template-areas: 
-    'board board board chat'
-    'board board board chat'
-    'board board board chat'
-    'doneBtn resetBtn timer chat';
+    'board board chat'
+    'board board chat'
+    'board board chat'
+    'doneBtn resetBtn chat';
 
     height: 87vh;
 
@@ -128,7 +128,8 @@ button:hover {
 .gameTimer {
     grid-area: timer;
     position: relative;
-    left: -15rem;
+    left: -420px;
+    top: -54px;
     z-index: 20;
     height: 54px;
     width: 210px;
