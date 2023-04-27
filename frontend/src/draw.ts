@@ -12,6 +12,11 @@ const boardSizeY = 15;
 let main = document.querySelector("main") as HTMLElement;
 
 export function createGameHTML(freePaint: boolean) {
+	const pageHeader = document.getElementById('header');
+
+	pageHeader?.classList.add('smallHeader');
+	main.classList.add('game-container');
+
 	let user = JSON.parse(sessionStorage.getItem('user') || "{}");
 
 	let boardTable = document.createElement("table");
@@ -60,7 +65,7 @@ export function createGameHTML(freePaint: boolean) {
 		await reset();
 	})
 
-	main.append(resetDrawBtn, boardTable, doneBtn);
+	main.append(boardTable, doneBtn, resetDrawBtn);
 
 	if (!freePaint) {
 		showTemplate(user._id);

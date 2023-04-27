@@ -1,8 +1,40 @@
+
+/*
 .boardTable {
   background-color: green;
   margin: auto;
   height: 800px;
   width: 800px;
+}
+*/
+
+.game-container {
+    display: grid;
+    grid-template-areas: 
+    'board board chat'
+    'board board chat'
+    'board board chat'
+    'doneBtn resetBtn chat';
+
+    height: 87vh;
+
+    background-color: #242424a5;
+}
+
+.smallHeader {
+    padding: 0.2rem;
+    font-size: 1.5rem;
+}
+
+.board {
+    grid-area: board;
+    display: flex;
+    flex-direction: column;
+
+    
+
+    padding: 1rem;
+    margin: 1rem 1rem 1rem 6rem;
 }
 
 .new-td {
@@ -22,6 +54,74 @@
   margin: 0 auto;
 }
 
+#doneBtn {
+    grid-area: doneBtn;
+    margin-left: 5rem;
+
+    font-size: 1.5rem;
+
+    height: 54px;
+    width: 210px;
+
+    border-radius: 0.3rem;
+
+    background-color: #242424;
+
+    transition: all 0.3s ease-in-out;
+}
+
 .reset-draw-btn {
-  margin-top: 100px;
+    grid-area: resetBtn;
+    position: relative;
+    left: -15rem;
+
+    font-size: 1.5rem;
+
+    height: 54px;
+    width: 210px;
+
+    border-radius: 0.3rem;
+
+    background-color: #242424;
+
+    transition: all 0.3s ease-in-out;
+}
+
+#sendMessageBtn {
+    margin: 0.2rem;
+    font-size: 1rem;
+
+    height: 38px;
+    width: 147px;
+
+    border-radius: 0.3rem;
+
+    background-color: #242424;
+
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+}
+
+.chat-container {
+    grid-area: chat;
+    position: absolute;
+    right: 1rem;
+    max-width: 30vw;
+    height: 86vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+
+    background-color: #242424;
+
+    .chat-output {
+        background-color: #242424;
+        min-width: 30vw;
+        min-height: 60vh;
+    }
 }
