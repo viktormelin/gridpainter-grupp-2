@@ -6,6 +6,10 @@ import { createSavedPicsHTML } from "./saved-pics";
 
 export function createGameSelectHTML() {
 	const main = document.querySelector('main') as HTMLElement;
+	main.classList.remove('game-container');
+
+	const pageHeader = document.getElementById('header');
+	pageHeader?.classList.remove('smallHeader');
 
 	main.innerHTML = `
     <div class="menuContainer">
