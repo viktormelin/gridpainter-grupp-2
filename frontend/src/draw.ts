@@ -50,6 +50,11 @@ export function createGameHTML(freePaint: boolean) {
 
 	main.innerHTML= ` `
 
+	doneBtn.addEventListener('click', () => {
+		socket.emit("gameState", { userId: user?._id, state: "done" });
+	})
+
+
 	resetDrawBtn.addEventListener('click', async () => {
 		await reset();
 	})
@@ -87,3 +92,19 @@ socket.on("draw", (msg: IServerDrawMessage) => {
 	}
 });
 
+socket.on("gameState", () => {
+	// Save game/picture
+	// Calculate score
+	// Create html for score overlay plus home button
+
+	let overlay = document.createElement('div');
+	overlay.id = 'overlay';
+
+	let scoreBoard = document.createElement('div');
+	scoreBoard.id = 'scoreboard';
+	scoreBoard.innerHTML= `Test`;
+
+	overlay.append(scoreBoard);
+	main.append(overlay);
+	
+})
