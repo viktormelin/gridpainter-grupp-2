@@ -11,9 +11,9 @@ export async function handleGameStart(game: gameClass, io: any) {
 let doneUsers: string[] = []
 
 export function handleGameState(msg: ClientStateMessage, io: any) {
-    /*if (doneUsers.includes(msg.userId)) {
+    if (doneUsers.includes(msg.userId)) {
         return;
-    } */
+    } 
 
     doneUsers.push(msg.userId);
     console.log(doneUsers);
