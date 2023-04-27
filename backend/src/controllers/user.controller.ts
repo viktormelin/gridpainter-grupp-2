@@ -4,18 +4,29 @@ import User from '../models/UserModel';
 let i = 0;
 
 const colors = [
-	"#00FFFF",
+    "#00FFFF",
     "#808080",
     "#000080",
     "#C0C0C0",
-];
+    "#000000",
+    "#008000",
+    "#808000",
+    "#008080",
+    "#0000FF",
+    "#00FF00",
+    "#800080",
+    "#FF00FF",
+    "#800000",
+    "#FF0000",
+    "#FFFF00",
+]
 
 export const addUser = asyncHandler(async (req, res) => {	
   try {
     const userExists = await User.find({ username: req.body.username })
 
 	const color = colors[i];
-	i = (i + 1) % 4;
+	i = (i + 1) % 15;
 
     
     if (userExists.length === 0) {
