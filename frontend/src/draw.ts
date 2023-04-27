@@ -43,11 +43,18 @@ export function createGameHTML(freePaint: boolean) {
 	resetDrawBtn.className = "reset-draw-btn";
 	resetDrawBtn.innerText = "Reset painting";
 
+
+	let doneBtn = document.createElement('button');
+	doneBtn.id = "doneBtn";
+	doneBtn.innerText = "Done";
+
+	main.innerHTML= ` `
+
 	resetDrawBtn.addEventListener('click', async () => {
 		await reset();
 	})
 
-	main.append(resetDrawBtn, boardTable);
+	main.append(resetDrawBtn, boardTable, doneBtn);
 
 	if (!freePaint) {
 		showTemplate(user._id);

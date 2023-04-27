@@ -16,5 +16,5 @@ export interface IGame {
   active: Boolean;
   full: Boolean;
   gameImage: Object;
-
+  //done: Boolean;
 }
