@@ -37,7 +37,13 @@ export function createGameHTML() {
 	resetDrawBtn.id = "resetDrawBtn";
 	resetDrawBtn.innerText = "Reset painting";
 
-	main.append(resetDrawBtn, boardTable);
+	let doneBtn = document.createElement('button');
+	doneBtn.id = "doneBtn";
+	doneBtn.innerText = "Done";
+
+	main.innerHTML= ` `
+
+	main.append(resetDrawBtn, boardTable, doneBtn);
 
 	resetDrawBtn.addEventListener('click', async () => {
 		await reset();
