@@ -1,0 +1,41 @@
+#overlay {
+    display: flex;
+    position: absolute;
+
+    top: 14.8rem;
+
+    height: 200vh;
+    width: 100vw;
+
+    background-color: #00000078;
+
+    #scoreBoard {
+        position: absolute;
+        margin-top: 5%;        
+        left: 50%;
+        transform: translateX(-50%);
+        
+        height: 40vh;
+        width: 30vw;
+
+        padding: 2rem;
+
+        border-radius: 0.2rem;
+
+        z-index: 2;
+
+        background-color: #242424;
+    }
+
+    #backToMenuBtn {
+        display: flex;
+        margin: auto;
+        bottom: -20rem;
+        left: 0;
+        transform: translateX(0);
+
+        justify-content: center;
+        align-items: center;
+    }
+}
+

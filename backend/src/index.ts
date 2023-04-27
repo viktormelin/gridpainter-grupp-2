@@ -13,8 +13,9 @@ import * as http from 'http';
 import connectDB from './config/database';
 import gameRouter from './routes/game.route';
 import { gameClass } from './models/gameModel';
-import { handleGameStart } from './services/game.service';
+import { handleGameStart, handleGameState } from './services/game.service';
 import drawRouter from './routes/draw.route';
+import { ClientStateMessage } from './models/ClientStateMessage';
 
 dotenv.config();
 
@@ -51,6 +52,10 @@ io.on("connection", (socket: Socket) => {
 
 	socket.on("gameEvent", (game: gameClass) => {
 		handleGameStart(game, io);
+	});
+
+	socket.on("gameState", (arg: ClientStateMessage) => {
+		handleGameState(arg, io);
 	});
 
 	socket.on("draw", (arg: ClientDrawMessage) => {

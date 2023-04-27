@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
 import { IServerDrawMessage } from "./models/IServerDrawMessage";
 import { reset, showTemplate } from "./utils/draw";
+import { createGameSelectHTML } from "./game-select";
 const socket = io(`${import.meta.env.VITE_BASE_URI}`);
 
 let ignoreUpdates = false;
@@ -50,6 +51,11 @@ export function createGameHTML(freePaint: boolean) {
 
 	main.innerHTML= ` `
 
+	doneBtn.addEventListener('click', () => {
+		socket.emit("gameState", { userId: user?._id, state: "done" });
+	})
+
+
 	resetDrawBtn.addEventListener('click', async () => {
 		await reset();
 	})
@@ -87,3 +93,28 @@ socket.on("draw", (msg: IServerDrawMessage) => {
 	}
 });
 
+socket.on("gameState", () => {
+	// Save game/picture
+	// Calculate score
+	// Create html for score overlay plus home button
+
+	let overlay = document.createElement('div');
+	overlay.id = 'overlay';
+
+	let scoreBoard = document.createElement('div');
+	scoreBoard.id = 'scoreBoard';
+	scoreBoard.innerHTML= `ADD CALCULATED SCORE HERE`;
+
+	let backToMenuBtn = document.createElement('button');
+	backToMenuBtn.id = 'backToMenuBtn'
+	backToMenuBtn.innerHTML = 'Back to menu'
+
+	scoreBoard.append(backToMenuBtn);
+	overlay.append(scoreBoard);
+	main.append(overlay);
+
+	backToMenuBtn?.addEventListener('click', function () {
+        createGameSelectHTML();
+    })
+	
+})
