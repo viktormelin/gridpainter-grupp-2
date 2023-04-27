@@ -30,6 +30,7 @@ async function joinGameService(arg: IUser | null): Promise<IGame> {
 
 
 socket.on('gameEvent', (arg: IGame) => {   
+    const pageHeader = document.getElementById('header');
     const gameAssemblyContainer = document.querySelector('.gameAssemblyContainer')
     if (gameAssemblyContainer && arg) {
         gameAssemblyContainer.innerHTML = `
@@ -47,6 +48,7 @@ socket.on('gameEvent', (arg: IGame) => {
 		gameAssemblyContainer.innerHTML = "";
 		createChatHTML();
 		createGameHTML(false);
+        pageHeader?.classList.add('smallHeader');
         }
     }
 })

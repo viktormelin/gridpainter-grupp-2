@@ -12,6 +12,10 @@ const boardSizeY = 15;
 let main = document.querySelector("main") as HTMLElement;
 
 export function createGameHTML(freePaint: boolean) {
+	const pageHeader = document.getElementById('header');
+
+	pageHeader?.classList.add('smallHeader');
+	
 	let user = JSON.parse(sessionStorage.getItem('user') || "{}");
 
 	let boardTable = document.createElement("table");
