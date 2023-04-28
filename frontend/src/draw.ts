@@ -112,7 +112,10 @@ socket.on("gameState", () => {
 
 	let scoreBoard = document.createElement('div');
 	scoreBoard.id = 'scoreBoard';
-	scoreBoard.innerHTML= `ADD CALCULATED SCORE HERE`;
+	const timerSpan = document.querySelector('.gameTimer') as HTMLSpanElement;
+	const time = stringToNumber(timerSpan?.innerHTML);
+	timerSpan.remove();
+	scoreBoard.innerHTML = `Time: ${time}<br>`;
 
 	let backToMenuBtn = document.createElement('button');
 	backToMenuBtn.id = 'backToMenuBtn'
@@ -138,4 +141,11 @@ function timer(time: number, timeSpan: HTMLSpanElement) {
 }
 function countUp(num: number): number {
 	return ++num;
+}
+
+function stringToNumber(str: string | undefined) {
+	if (str) {
+		return Number(str);
+	}
+	return 0;
 }
