@@ -69,6 +69,10 @@ export function createGameHTML(freePaint: boolean) {
 
 	if (!freePaint) {
 		showTemplate(user._id);
+		const timerSpan = document.createElement('span') as HTMLSpanElement;
+		timerSpan.classList.add('gameTimer');
+		main.appendChild(timerSpan);
+		timer(-10, timerSpan);
 	}
 }
 
@@ -123,3 +127,15 @@ socket.on("gameState", () => {
     })
 	
 })
+
+function timer(time: number, timeSpan: HTMLSpanElement) {
+	setTimeout(() => {
+		time = countUp(time);
+		timer(time,timeSpan);
+		timeSpan.innerHTML = time.toString();
+		
+	}, 1000)
+}
+function countUp(num: number): number {
+	return ++num;
+}

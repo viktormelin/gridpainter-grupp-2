@@ -125,3 +125,15 @@ button:hover {
         min-height: 60vh;
     }
 }
+.gameTimer {
+    grid-area: timer;
+    position: relative;
+    left: -420px;
+    top: -54px;
+    z-index: 20;
+    height: 54px;
+    width: 210px;
+    background-color: #242424;
+    text-align: center;
+    font-size: 2rem;
+}
